@@ -1,38 +1,34 @@
 <?php
-$xArray = [];
-for($i=0; $i<6; $i++) { $xArray[]=rand(1,100); }
 
-$yArray = [];
-for($i=0; $i<6; $i++) { $yArray[]=rand(1,100); }
+function fill_arrays(&$xArr, &$yArr, &$zArr): void {
+    $xArr = [];
+    $yArr = [];
+    $zArr = [];
 
-$zArray = [];
-for($i=0; $i<6; $i++) { $zArray[]=rand(1,100); }
-
-$uArray = [];
-$tempArray = array_merge($xArray, $yArray, $zArray);
-
-for ($i = 0; $i < count($tempArray); $i++) {
-    $uArray[$i] = (int) decoct($tempArray[$i]);
+    for ($i = 0; $i < 6; $i++) {
+        $xArr[] = rand(1, 100);
+        $yArr[] = rand(1, 100);
+        $zArr[] = rand(1, 100);
+    }
 }
-sort($uArray);
 
-//echo '<pre>';
-//print_r($xArray);
-//echo '</pre>';
-//
-//echo '<pre>';
-//print_r($yArray);
-//echo '</pre>';
-//
-//echo '<pre>';
-//print_r($zArray);
-//echo '</pre>';
+$xArr = [];
+$yArr = [];
+$zArr = [];
+fill_arrays($xArr, $yArr, $zArr);
+
+$uArr = array_merge($xArr, $yArr, $zArr);
+
+foreach ($uArr as &$u){
+    $u = (int) decoct($u);
+}
+
+asort($uArr);
 
 echo '<pre>';
-print_r($uArray);
+print_r($uArr);
 echo '</pre>';
 
-$uArray = array_slice($uArray, -5, 5);
-echo 'The largest numbers in the array: ' . implode(', ', $uArray);
-
+$uArr = array_slice($uArr, -5, 5);
+echo 'The largest numbers in the array: ' . implode(', ', $uArr);
 
